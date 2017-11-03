@@ -1,0 +1,189 @@
+{
+    "appid": "e9c94fb2-31da-43eb-8109-8d5743569e5f",
+    "name": "Cyber Triage",
+    "description": "Place holder for app description",
+    "type": "endpoint",
+    "product_vendor": "Basis Technology",
+    "logo": "cybertriage.png",
+    "product_name": "Cyber Triage",
+    "product_version_regex": ".*",
+    "publisher": "Basis Technology",
+    "license": "Copyright Basis Technology 2017",
+    "app_version": "1.0.0",
+    "utctime_updated": "2017-10-30T18:10:35.173255Z",
+    "package_name": "phantom_cybertriage",
+    "main_module": "cybertriage_connector.py",
+    "min_phantom_version": "3.0.264",
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "server": {
+            "description": "IP\\hostname of a Cyber Triage server",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 0
+        },
+        "api_key": {
+            "description": "API key from a Cyber Triage server",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 1
+        },
+        "username": {
+            "description": "Domain\\Username of an administrative Windows account",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 2
+        },
+        "password": {
+            "description": "Account password",
+            "data_type": "password",
+            "required": true,
+            "order": 3
+        },
+        "verify_server_cert": {
+            "description": "Verify the Cyber Triage server certificate",
+            "data_type": "boolean",
+            "required": true,
+            "default": "true",
+            "order": 4
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "triage endpoint",
+            "identifier": "triage_endpoint",
+            "description": "Initiates a Cyber Triage collection on a remote endpoint",
+            "verbose": "Verbose description placeholder",
+            "type": "investigate",
+            "read_only": true,
+            "parameters": {
+                "ip_hostname": {
+                    "description": "IP\\Hostname of the endpoint Cyber Triage will triage",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": true,
+                    "contains": [
+                        "ip",
+                        "ipv6",
+                        "host name"
+                    ],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0
+                },
+                "malware_scan": {
+                    "description": "Send MD5 hashes to external malware analysis service",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "default": "Enabled",
+                    "order": 1
+                },
+                "file_upload": {
+                    "description": "Send unknown files to external malware analysis service",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "default": "Disabled",
+                    "order": 2
+                },
+                "full_scan": {
+                    "description": "Scan entire file system for suspicious files",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "default": "Disabled",
+                    "order": 3
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.ip_hostname",
+                    "data_type": "string",
+                    "contains": [
+                        "ip",
+                        "ipv6",
+                        "host name"
+                    ],
+                    "column_name": "ip_hostname",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.malware_scan",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "malware_scan",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.file_upload",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "file_upload",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.parameter.full_scan",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "full_scan",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        }
+    ]
+}
