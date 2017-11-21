@@ -1,7 +1,7 @@
 {
     "appid": "e9c94fb2-31da-43eb-8109-8d5743569e5f",
     "name": "Cyber Triage",
-    "description": "Place holder for app description",
+    "description": "This app integrates with the Cyber Triage device to implement investigative actions",
     "type": "endpoint",
     "product_vendor": "Basis Technology",
     "logo": "cybertriage.png",
@@ -12,12 +12,12 @@
     "app_version": "1.0.0",
     "utctime_updated": "2017-10-30T18:10:35.173255Z",
     "package_name": "phantom_cybertriage",
-    "main_module": "cybertriage_connector.py",
-    "min_phantom_version": "3.0.264",
-    "app_wizard_version": "1.0.0",
+    "main_module": "cybertriage_connector.pyc",
+    "min_phantom_version": "3.0.251",
+    "app_wizard_version": "1.0.1",
     "configuration": {
         "server": {
-            "description": "IP\\hostname of a Cyber Triage server",
+            "description": "IP/hostname of a Cyber Triage server",
             "data_type": "string",
             "required": true,
             "value_list": [],
@@ -67,7 +67,7 @@
             "versions": "EQ(*)"
         },
         {
-            "action": "triage endpoint",
+            "action": "scan endpoint",
             "identifier": "triage_endpoint",
             "description": "Initiates a Cyber Triage collection on a remote endpoint",
             "verbose": "Verbose description placeholder",
