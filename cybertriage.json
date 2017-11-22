@@ -1,23 +1,23 @@
 {
     "appid": "e9c94fb2-31da-43eb-8109-8d5743569e5f",
     "name": "Cyber Triage",
-    "description": "This app integrates with the Cyber Triage device to implement investigative actions",
+    "description": "Initiates a remote endpoint collection to support an investigation using Cyber Triage.",
     "type": "endpoint",
     "product_vendor": "Basis Technology",
     "logo": "cybertriage.png",
     "product_name": "Cyber Triage",
-    "product_version_regex": ".*",
+    "product_version_regex": "2.1.8",
     "publisher": "Basis Technology",
-    "license": "Copyright Basis Technology 2017",
+    "license": "Apache 2.0",
     "app_version": "1.0.0",
     "utctime_updated": "2017-10-30T18:10:35.173255Z",
     "package_name": "phantom_cybertriage",
-    "main_module": "cybertriage_connector.pyc",
-    "min_phantom_version": "3.0.251",
-    "app_wizard_version": "1.0.1",
+    "main_module": "cybertriage_connector.py",
+    "min_phantom_version": "3.0.264",
+    "app_wizard_version": "1.0.0",
     "configuration": {
         "server": {
-            "description": "IP/hostname of a Cyber Triage server",
+            "description": "IP or hostname of a Cyber Triage server",
             "data_type": "string",
             "required": true,
             "value_list": [],
@@ -26,10 +26,8 @@
         },
         "api_key": {
             "description": "API key from a Cyber Triage server",
-            "data_type": "string",
+            "data_type": "password",
             "required": true,
-            "value_list": [],
-            "default": "",
             "order": 1
         },
         "username": {
@@ -50,7 +48,7 @@
             "description": "Verify the Cyber Triage server certificate",
             "data_type": "boolean",
             "required": true,
-            "default": "true",
+            "default": false,
             "order": 4
         }
     },
@@ -68,20 +66,19 @@
         },
         {
             "action": "scan endpoint",
-            "identifier": "triage_endpoint",
+            "identifier": "scan_endpoint",
             "description": "Initiates a Cyber Triage collection on a remote endpoint",
-            "verbose": "Verbose description placeholder",
+            "verbose": "This action schedules a collection for a remote endpoint via a Cyber Triage server. The successful run of this action indicates that a collection was scheduled on the Cyber Triage server and does not indicate that a collection was completed. On success the action returns a cyber triage session id which can be used by other actions to query information regarding that session. ",
             "type": "investigate",
             "read_only": true,
             "parameters": {
                 "ip_hostname": {
-                    "description": "IP\\Hostname of the endpoint Cyber Triage will triage",
+                    "description": "IP or hostname of the Windows endpoint to collect.",
                     "data_type": "string",
                     "required": true,
                     "primary": true,
                     "contains": [
                         "ip",
-                        "ipv6",
                         "host name"
                     ],
                     "value_list": [],
@@ -90,41 +87,26 @@
                 },
                 "malware_scan": {
                     "description": "Send MD5 hashes to external malware analysis service",
-                    "data_type": "string",
+                    "data_type": "boolean",
                     "required": true,
                     "primary": false,
-                    "contains": [],
-                    "value_list": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "default": "Enabled",
+                    "default": true,
                     "order": 1
                 },
                 "file_upload": {
-                    "description": "Send unknown files to external malware analysis service",
-                    "data_type": "string",
+                    "description": "Send unknown files to external malware analysis service. Malware scan must be enabled for file upload to occur.",
+                    "data_type": "boolean",
                     "required": true,
                     "primary": false,
-                    "contains": [],
-                    "value_list": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "default": "Disabled",
+                    "default": false,
                     "order": 2
                 },
                 "full_scan": {
                     "description": "Scan entire file system for suspicious files",
-                    "data_type": "string",
+                    "data_type": "boolean",
                     "required": true,
                     "primary": false,
-                    "contains": [],
-                    "value_list": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "default": "Disabled",
+                    "default": true,
                     "order": 3
                 }
             },
@@ -134,50 +116,81 @@
                     "data_type": "string",
                     "contains": [
                         "ip",
-                        "ipv6",
                         "host name"
                     ],
                     "column_name": "ip_hostname",
-                    "column_order": 0
+                    "column_order": 0,
+                    "example_values": [
+                        "computer1-vm"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.malware_scan",
                     "data_type": "string",
-                    "contains": [],
                     "column_name": "malware_scan",
-                    "column_order": 1
+                    "column_order": 3,
+                    "example_values": [
+                        true,
+                        false
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.file_upload",
                     "data_type": "string",
-                    "contains": [],
                     "column_name": "file_upload",
-                    "column_order": 2
+                    "column_order": 4,
+                    "example_values": [
+                        true,
+                        false
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.full_scan",
                     "data_type": "string",
-                    "contains": [],
                     "column_name": "full_scan",
-                    "column_order": 3
+                    "column_order": 5,
+                    "example_values": [
+                        true,
+                        false
+                    ]
                 },
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
                     "column_name": "status",
-                    "column_order": 4
+                    "column_order": 2,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Sessionid: computer1-vm|1509568164801",
+                        "Error from Cyber Triage server. Status Code: 401 Data from server: Unauthorized.",
+                        "Error from Cyber Triage server. Status Code: 404 Data from server: The network path was not found."
+                    ]
                 },
                 {
-                    "data_path": "summary.total_objects",
-                    "data_type": "numeric"
+                    "data_path": "action_result.data.*.SessionId",
+                    "data_type": "string",
+                    "contains": [
+                        "cyber triage session id"
+                    ],
+                    "column_name": "session_id",
+                    "column_order": 1,
+                    "example_values": [
+                        "computer1-vm|1509568164801"
+                    ]
                 },
                 {
-                    "data_path": "summary.total_objects_successful",
-                    "data_type": "numeric"
+                    "data_path": "action_result.summary.sessionID",
+                    "data_type": "string",
+                    "example_values": [
+                        "computer1-vm|1509568164801"
+                    ]
                 }
             ],
             "render": {
