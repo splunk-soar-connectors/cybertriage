@@ -1,7 +1,7 @@
 {
     "appid": "e9c94fb2-31da-43eb-8109-8d5743569e5f",
     "name": "Cyber Triage",
-    "description": "Initiates a remote endpoint collection to support an investigation using Cyber Triage.",
+    "description": "Initiates a remote endpoint collection to support an investigation using Cyber Triage",
     "type": "endpoint",
     "product_vendor": "Basis Technology",
     "logo": "cybertriage.png",
@@ -73,7 +73,7 @@
             "read_only": true,
             "parameters": {
                 "ip_hostname": {
-                    "description": "IP or hostname of the Windows endpoint to collect.",
+                    "description": "IP or hostname of the Windows endpoint to collect",
                     "data_type": "string",
                     "required": true,
                     "primary": true,
@@ -94,7 +94,7 @@
                     "order": 1
                 },
                 "file_upload": {
-                    "description": "Send unknown files to external malware analysis service. Malware scan must be enabled for file upload to occur.",
+                    "description": "Send unknown files to external malware analysis service. Malware scan must be enabled for file upload to occur",
                     "data_type": "boolean",
                     "required": true,
                     "primary": false,
