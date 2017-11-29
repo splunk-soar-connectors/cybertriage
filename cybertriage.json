@@ -12,7 +12,7 @@
     "app_version": "1.0.0",
     "utctime_updated": "2017-10-30T18:10:35.173255Z",
     "package_name": "phantom_cybertriage",
-    "main_module": "cybertriage_connector.pyc",
+    "main_module": "cybertriage_connector.py",
     "min_phantom_version": "3.0.264",
     "app_wizard_version": "1.0.0",
     "configuration": {
