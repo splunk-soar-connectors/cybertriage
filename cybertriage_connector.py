@@ -164,7 +164,7 @@ class CyberTriageConnector(BaseConnector):
     # Phantom wrapper around the Requests module to make creating http requests and handling errors easier.
     #
     # Args:
-    #  endpoint:      (str)           a rest endpoint - not including the base url. 
+    #  endpoint:      (str)           a rest endpoint - not including the base url.
     #                                 ex "/livesessions" is passed in instead of https://server:9443/api/livesessions
     #  action_result: (action_result) an action result object
     #  headers:       (dict)          a dictionary of http headers
