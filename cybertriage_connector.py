@@ -17,16 +17,16 @@
 # limitations under the License.
 #
 
+import json
+
 # Phantom App imports
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
-from phantom.action_result import ActionResult
-
 # Usage of the consts file is recommended
 # from cybertriage_consts import *
 import requests
-import json
 from bs4 import BeautifulSoup
+from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 
 class RetVal(tuple):
@@ -164,7 +164,8 @@ class CyberTriageConnector(BaseConnector):
     # Phantom wrapper around the Requests module to make creating http requests and handling errors easier.
     #
     # Args:
-    #  endpoint:      (str)           a rest endpoint - not including the base url. ex "/livesessions" is passed in instead of https://server:9443/api/livesessions
+    #  endpoint:      (str)           a rest endpoint - not including the base url. 
+    #                                 ex "/livesessions" is passed in instead of https://server:9443/api/livesessions
     #  action_result: (action_result) an action result object
     #  headers:       (dict)          a dictionary of http headers
     #  params:        (dict)          a dictionary of params that are converted into a query string in the url
@@ -192,7 +193,8 @@ class CyberTriageConnector(BaseConnector):
                             verify=self.verify_server_cert,
                             params=params)
         except Exception as e:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error Connecting to Cyber Triage server. Details: {0}".format(str(e))), resp_json)
+            return RetVal(action_result.set_status(phantom.APP_ERROR,
+                "Error Connecting to Cyber Triage server. Details: {0}".format(str(e))), resp_json)
 
         return self._process_response(r, action_result)
 
@@ -254,7 +256,8 @@ class CyberTriageConnector(BaseConnector):
         api_data.update({'sendIpAddress': False})
 
         # make rest call
-        ret_val, response = self._make_rest_call('/livesessions', action_result, params=None, headers=self.api_headers, data=api_data, method="post")
+        ret_val, response = self._make_rest_call('/livesessions',
+            action_result, params=None, headers=self.api_headers, data=api_data, method="post")
 
         if (phantom.is_fail(ret_val)):
             # the call to the 3rd party device or service failed, action result should contain all the error details
@@ -332,9 +335,10 @@ class CyberTriageConnector(BaseConnector):
 # It is not used within the Phantom UI
 if __name__ == '__main__':
 
-    import sys
-    import pudb
     import argparse
+    import sys
+
+    import pudb
 
     pudb.set_trace()
 
@@ -351,7 +355,7 @@ if __name__ == '__main__':
     password = args.password
 
     if (len(sys.argv) < 2):
-        print "No test json specified as input"
+        print("No test json specified as input")
         exit(0)
 
     if (username is not None and password is None):
@@ -362,7 +366,7 @@ if __name__ == '__main__':
 
     if (username and password):
         try:
-            print ("Accessing the Login page")
+            print("Accessing the Login page")
             r = requests.get("https://127.0.0.1/login", verify=False)
             csrftoken = r.cookies['csrftoken']
 
@@ -375,11 +379,11 @@ if __name__ == '__main__':
             headers['Cookie'] = 'csrftoken=' + csrftoken
             headers['Referer'] = 'https://127.0.0.1/login'
 
-            print ("Logging into Platform to get the session id")
+            print("Logging into Platform to get the session id")
             r2 = requests.post("https://127.0.0.1/login", verify=False, data=data, headers=headers)
             session_id = r2.cookies['sessionid']
         except Exception as e:
-            print ("Unable to get session id from the platfrom. Error: " + str(e))
+            print("Unable to get session id from the platfrom. Error: " + str(e))
             exit(1)
 
     with open(sys.argv[1]) as f:
@@ -394,6 +398,6 @@ if __name__ == '__main__':
             in_json['user_session_token'] = session_id
 
         ret_val = connector._handle_action(json.dumps(in_json), None)
-        print (json.dumps(json.loads(ret_val), indent=4))
+        print(json.dumps(json.loads(ret_val), indent=4))
 
     exit(0)
