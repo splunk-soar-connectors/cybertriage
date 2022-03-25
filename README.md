@@ -1,8 +1,8 @@
 [comment]: # "Auto-generated SOAR connector documentation"
-# Cyber Triage
+# Cyber Triage \- Cyber Triage for SOAR
 
 Publisher: Basis Technology  
-Connector Version: 1\.0\.3  
+Connector Version: 1\.0\.4  
 Product Vendor: Basis Technology  
 Product Name: Cyber Triage  
 Product Version Supported (regex): "2\.1\.8"  
