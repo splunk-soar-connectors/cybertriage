@@ -30,6 +30,7 @@ from phantom.base_connector import BaseConnector
 # Usage of the consts file is recommended
 from cybertriage_consts import *
 
+
 class RetVal(tuple):
     def __new__(cls, val1, val2):
         return tuple.__new__(RetVal, (val1, val2))
