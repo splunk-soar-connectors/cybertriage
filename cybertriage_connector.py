@@ -21,13 +21,14 @@ import json
 
 # Phantom App imports
 import phantom.app as phantom
-# Usage of the consts file is recommended
-from cybertriage_consts import *
+
 import requests
 from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
 
+# Usage of the consts file is recommended
+from cybertriage_consts import *
 
 class RetVal(tuple):
     def __new__(cls, val1, val2):
