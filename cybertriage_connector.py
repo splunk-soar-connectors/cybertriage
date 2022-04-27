@@ -21,7 +21,6 @@ import json
 
 # Phantom App imports
 import phantom.app as phantom
-
 import requests
 from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
