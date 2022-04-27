@@ -22,7 +22,7 @@ import json
 # Phantom App imports
 import phantom.app as phantom
 # Usage of the consts file is recommended
-# from cybertriage_consts import *
+from cybertriage_consts import *
 import requests
 from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
@@ -347,12 +347,14 @@ if __name__ == '__main__':
     argparser.add_argument('input_test_json', help='Input Test JSON file')
     argparser.add_argument('-u', '--username', help='username', required=False)
     argparser.add_argument('-p', '--password', help='password', required=False)
+    argparser.add_argument('-v', '--verify', action='store_true', help='verify', required=False, default=False)
 
     args = argparser.parse_args()
     session_id = None
 
     username = args.username
     password = args.password
+    verify = args.verify
 
     if (len(sys.argv) < 2):
         print("No test json specified as input")
@@ -367,7 +369,7 @@ if __name__ == '__main__':
     if (username and password):
         try:
             print("Accessing the Login page")
-            r = requests.get("https://127.0.0.1/login", verify=False)
+            r = requests.get("https://127.0.0.1/login", verify=verify, timeout=CYBERTRIAGE_DEFAULT_REQUEST_TIMEOUT)
             csrftoken = r.cookies['csrftoken']
 
             data = dict()
@@ -380,7 +382,8 @@ if __name__ == '__main__':
             headers['Referer'] = 'https://127.0.0.1/login'
 
             print("Logging into Platform to get the session id")
-            r2 = requests.post("https://127.0.0.1/login", verify=False, data=data, headers=headers)
+            r2 = requests.post("https://127.0.0.1/login", verify=verify, data=data, headers=headers,
+                               timeout=CYBERTRIAGE_DEFAULT_REQUEST_TIMEOUT)
             session_id = r2.cookies['sessionid']
         except Exception as e:
             print("Unable to get session id from the platfrom. Error: " + str(e))
