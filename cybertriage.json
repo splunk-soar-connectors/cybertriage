@@ -1,6 +1,6 @@
 {
     "appid": "e9c94fb2-31da-43eb-8109-8d5743569e5f",
-    "name": "Cyber Triage - Cyber Triage for SOAR",
+    "name": "Cyber Triage for SOAR",
     "description": "Initiates a remote endpoint collection to support an investigation using Cyber Triage",
     "type": "endpoint",
     "product_vendor": "Basis Technology",
@@ -13,7 +13,7 @@
     "utctime_updated": "2022-01-07T21:54:17.000000Z",
     "package_name": "phantom_cybertriage",
     "main_module": "cybertriage_connector.py",
-    "min_phantom_version": "3.0.251",
+    "min_phantom_version": "5.2.0",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "server": {
@@ -57,7 +57,6 @@
             "action": "test connectivity",
             "identifier": "test_connectivity",
             "description": "Validate the asset configuration for connectivity using supplied configuration",
-            "verbose": "",
             "type": "test",
             "read_only": true,
             "parameters": {},
@@ -68,7 +67,7 @@
             "action": "scan endpoint",
             "identifier": "scan_endpoint",
             "description": "Initiates a Cyber Triage collection on a remote endpoint",
-            "verbose": "This action schedules a collection for a remote endpoint via a Cyber Triage server. The successful run of this action indicates that a collection was scheduled on the Cyber Triage server and does not indicate that a collection was completed. On success the action returns a cyber triage session id which can be used by other actions to query information regarding that session. ",
+            "verbose": "This action schedules a collection for a remote endpoint via a Cyber Triage server. The successful run of this action indicates that a collection was scheduled on the Cyber Triage server and does not indicate that a collection was completed. On success the action returns a cyber triage session id which can be used by other actions to query information regarding that session.",
             "type": "investigate",
             "read_only": true,
             "parameters": {
