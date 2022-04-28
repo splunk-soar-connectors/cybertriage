@@ -1,2 +1,1 @@
 **Unreleased**
-* Renamed 'Cyber Triage' app to 'Cyber Triage for SOAR' [PAPP-24795]
