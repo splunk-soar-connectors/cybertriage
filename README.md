@@ -2,7 +2,7 @@
 # Cyber Triage for SOAR
 
 Publisher: Basis Technology  
-Connector Version: 1\.0\.4  
+Connector Version: 1\.0\.5  
 Product Vendor: Basis Technology  
 Product Name: Cyber Triage  
 Product Version Supported (regex): "2\.1\.8"  
