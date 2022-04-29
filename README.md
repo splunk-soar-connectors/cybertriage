@@ -1,12 +1,12 @@
 [comment]: # "Auto-generated SOAR connector documentation"
-# Cyber Triage \- Cyber Triage for SOAR
+# Cyber Triage for SOAR
 
 Publisher: Basis Technology  
 Connector Version: 1\.0\.4  
 Product Vendor: Basis Technology  
 Product Name: Cyber Triage  
 Product Version Supported (regex): "2\.1\.8"  
-Minimum Product Version: 3\.0\.251  
+Minimum Product Version: 5\.2\.0  
 
 Initiates a remote endpoint collection to support an investigation using Cyber Triage
 
@@ -73,7 +73,7 @@ Initiates a Cyber Triage collection on a remote endpoint
 Type: **investigate**  
 Read only: **True**
 
-This action schedules a collection for a remote endpoint via a Cyber Triage server\. The successful run of this action indicates that a collection was scheduled on the Cyber Triage server and does not indicate that a collection was completed\. On success the action returns a cyber triage session id which can be used by other actions to query information regarding that session\. 
+This action schedules a collection for a remote endpoint via a Cyber Triage server\. The successful run of this action indicates that a collection was scheduled on the Cyber Triage server and does not indicate that a collection was completed\. On success the action returns a cyber triage session id which can be used by other actions to query information regarding that session\.
 
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
