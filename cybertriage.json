@@ -5,6 +5,8 @@
     "type": "endpoint",
     "product_vendor": "Basis Technology",
     "logo": "cybertriage.png",
+    "logo_dark": "cybertriage.png",
+    "logo_light": "cybertriage.png",
     "product_name": "Cyber Triage",
     "product_version_regex": "2.1.8",
     "publisher": "Basis Technology",
@@ -191,6 +193,14 @@
                     "example_values": [
                         "computer1-vm|1509568164801"
                     ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
                 }
             ],
             "render": {
